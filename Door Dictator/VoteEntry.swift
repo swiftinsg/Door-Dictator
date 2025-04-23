@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct VoteEntry: Codable {
+    var lock: Int
+    var unlock: Int
+}

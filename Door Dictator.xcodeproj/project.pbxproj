@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3208A73D2DB91AFC00931219 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 3208A73C2DB91AFC00931219 /* Vapor */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		3208A72C2DB91ACD00931219 /* Door Dictator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Door Dictator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3208A73D2DB91AFC00931219 /* Vapor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = "Door Dictator";
 			packageProductDependencies = (
+				3208A73C2DB91AFC00931219 /* Vapor */,
 			);
 			productName = "Door Dictator";
 			productReference = 3208A72C2DB91ACD00931219 /* Door Dictator.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 3208A7232DB91ACD00931219;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3208A73B2DB91AFC00931219 /* XCRemoteSwiftPackageReference "vapor" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3208A72D2DB91ACD00931219 /* Products */;
 			projectDirPath = "";
@@ -321,6 +330,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3208A73B2DB91AFC00931219 /* XCRemoteSwiftPackageReference "vapor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/vapor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.114.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3208A73C2DB91AFC00931219 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3208A73B2DB91AFC00931219 /* XCRemoteSwiftPackageReference "vapor" */;
+			productName = Vapor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3208A7242DB91ACD00931219 /* Project object */;
 }
