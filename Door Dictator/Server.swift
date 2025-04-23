@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 import Vapor
+import AppKit
 
 @MainActor
 @Observable
@@ -39,6 +40,21 @@ final class Server: Sendable {
             }
             
             try await app.execute()
+        }
+    }
+    
+    init() {
+        setUpResetCounter()
+    }
+    
+    func setUpResetCounter() {
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+            if event.keyCode == 49 {
+                self.lockVotes = 0
+                self.unlockVotes = 0
+                return nil
+            }
+            return event
         }
     }
 }

@@ -13,35 +13,20 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Votes")
-                .font(.largeTitle)
+            Text("4 people stuck outside")
+                .font(.system(size: 48))
+                .padding(100)
             
-            HStack {
-                VStack {
-                    Text("Lock Votes")
-                        .font(.title)
-                    Text("\(server.lockVotes)")
-                        .font(.largeTitle)
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                
-                Divider()
-                
-                VStack {
-                    Text("Unlock Votes")
-                        .font(.title)
-                    Text("\(server.unlockVotes)")
-                        .font(.largeTitle)
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-            }
+            Spacer()
+            
+            VoteTallyView(unlock: server.unlockVotes, lock: server.lockVotes)
         }
         .padding()
         .task {
             server.start()
         }
+        .frame(width: 1920, height: 1080)
+        .preferredColorScheme(.light)
     }
 }
 
