@@ -19,7 +19,7 @@ struct ContentView: View {
             
             Spacer()
             
-            VoteTallyView(unlock: server.unlockVotes, lock: server.lockVotes)
+            VoteTallyView(unlock: server.unlockVotes, lock: server.lockVotes, isVotingOverruled: server.isVotingOverruled)
         }
         .padding()
         .task {

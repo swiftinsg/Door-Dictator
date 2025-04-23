@@ -9,8 +9,12 @@ import SwiftUI
 
 struct VoteTallyView: View {
     
+    @Namespace var namespace
+    
     var unlock: Int
     var lock: Int
+    
+    var isVotingOverruled: Bool
     
     private let width = 1920.0 - 200
     
@@ -23,23 +27,41 @@ struct VoteTallyView: View {
             
             Rectangle()
                 .foregroundStyle(.green)
-                .frame(width: width * effectiveUnlock / effectiveTotalVotes)
+                .frame(width: isVotingOverruled ? width : width * effectiveUnlock / effectiveTotalVotes)
                 .overlay(alignment: .leading) {
-                    HStack {
-                        Image(systemName: "lock.open.fill")
-                        
-                        Text("\(unlock)")
-                            .monospacedDigit()
-                            .contentTransition(.numericText(value: Double(unlock)))
+                    if !isVotingOverruled {
+                        HStack {
+                            Image(systemName: "lock.open.fill")
+                                .matchedGeometryEffect(id: "unlock", in: namespace)
+                            
+                            Text("\(unlock)")
+                                .monospacedDigit()
+                                .contentTransition(.numericText(value: Double(unlock)))
+                                .matchedGeometryEffect(id: "unlock.count", in: namespace)
+                        }
+                        .padding()
+                        .font(.system(size: 48))
+                        .foregroundStyle(.black)
                     }
-                    .padding()
-                    .font(.system(size: 48))
-                    .foregroundStyle(.black)
+                }
+                .overlay {
+                    if isVotingOverruled {
+                        HStack {
+                            Image(systemName: "lock.open.fill")
+                                .matchedGeometryEffect(id: "unlock", in: namespace)
+                            
+                            Text("Door Unlocked")
+                                .matchedGeometryEffect(id: "unlock.count", in: namespace)
+                        }
+                        .padding()
+                        .font(.system(size: 48))
+                        .foregroundStyle(.black)
+                    }
                 }
             
             Rectangle()
                 .foregroundStyle(.red)
-                .frame(width: width * effectiveLock / effectiveTotalVotes)
+                .frame(width: isVotingOverruled ? .leastNormalMagnitude : width * effectiveLock / effectiveTotalVotes)
                 .overlay(alignment: .trailing) {
                     HStack {
                         Text("\(lock)")
@@ -54,12 +76,14 @@ struct VoteTallyView: View {
                 }
         }
         .frame(height: 100)
+        .clipShape(.rect(cornerRadius: 16))
         .padding(.bottom, 100)
         .animation(.easeInOut(duration: 0.5), value: unlock)
         .animation(.easeInOut(duration: 0.5), value: lock)
+        .animation(.easeInOut(duration: 0.5), value: isVotingOverruled)
     }
 }
 
 #Preview {
-    VoteTallyView(unlock: 0, lock: 0)
+    VoteTallyView(unlock: 0, lock: 0, isVotingOverruled: false)
 }

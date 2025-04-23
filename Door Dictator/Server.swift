@@ -20,6 +20,8 @@ final class Server: Sendable {
     var totalLockVotes: Int = 0
     var totalUnlockVotes: Int = 0
     
+    var isVotingOverruled = false
+    
     func start() {
         Task {
             let app = try await Application.make(.detect())
@@ -50,11 +52,20 @@ final class Server: Sendable {
     func setUpResetCounter() {
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
             if event.keyCode == 49 {
-                self.lockVotes = 0
-                self.unlockVotes = 0
+                Task {
+                    await self.resetVotes()
+                }
                 return nil
             }
             return event
         }
+    }
+    
+    func resetVotes() async {
+        isVotingOverruled = true
+        lockVotes = 0
+        unlockVotes = 0
+        try? await Task.sleep(for: .seconds(1))
+        isVotingOverruled = false
     }
 }
