@@ -14,6 +14,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
+<<<<<<< HEAD:Door Dictator/Views/ContentView.swift
             if camera.isLoading {
                 ProgressView()
                     .scaleEffect(1.5)
@@ -26,6 +27,16 @@ struct ContentView: View {
                     )
             }
 
+=======
+//            BulgeEffectView(points: [
+//                CGPoint(x: 0.5, y: 0.5),
+//                CGPoint(x: 0.2, y: 0.2),
+//                CGPoint(x: 0.3, y: 0.3),
+//                CGPoint(x: 0.8, y: 0.2),
+//            ])
+            BulgeDemoView()
+            
+>>>>>>> main:Door Dictator/ContentView.swift
             VStack {
                 Text("4 people stuck outside")
                     .font(.system(size: 48))
