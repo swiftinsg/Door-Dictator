@@ -29,7 +29,7 @@ struct ContentView: View {
 //            BulgeDemoView()
 
             VStack {
-                Text("\(camera.detectedFaces.count) people stuck outside")
+                Text("^[\(camera.detectedFaces.count) people](inflect: true) stuck outside")
                     .font(.system(size: 48))
                     .padding(100)
                 
