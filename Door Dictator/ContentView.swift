@@ -13,12 +13,13 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            BulgeEffectView(points: [
-                CGPoint(x: 0.5, y: 0.5),
-                CGPoint(x: 0.2, y: 0.2),
-                CGPoint(x: 0.3, y: 0.3),
-                CGPoint(x: 0.8, y: 0.2),
-            ])
+//            BulgeEffectView(points: [
+//                CGPoint(x: 0.5, y: 0.5),
+//                CGPoint(x: 0.2, y: 0.2),
+//                CGPoint(x: 0.3, y: 0.3),
+//                CGPoint(x: 0.8, y: 0.2),
+//            ])
+            BulgeDemoView()
             
             VStack {
                 Text("4 people stuck outside")

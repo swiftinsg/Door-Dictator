@@ -22,7 +22,7 @@ struct BulgeEffectView: View {
     var body: some View {
         Image(.grid)
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
             .visualEffect({ content, proxy in
                 content
                     .layerEffect(ShaderLibrary.bulgeEffect(
