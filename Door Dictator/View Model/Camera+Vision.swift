@@ -7,13 +7,16 @@
 
 import Foundation
 import Vision
+import CoreImage
 
 extension Camera {
     func detectFaces(in sampleBuffer: ImageBufferContainer) {
         Task(priority: .userInitiated) {
             let request = DetectFaceRectanglesRequest()
             
-            let points: [Float3] = try! await request.perform(on: sampleBuffer.buffer)
+            let ciImage = CIImage(cvPixelBuffer: sampleBuffer.buffer)
+            
+            let points: [Float3] = try! await request.perform(on: ciImage)
                 .map { observation in
                     Float3(
                         x: observation.boundingBox.cgRect.midX,
