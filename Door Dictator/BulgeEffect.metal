@@ -14,76 +14,39 @@ using namespace metal;
 [[ stitchable ]]
 half4 bulgeEffect(float2 position, SwiftUI::Layer layer,
                   float2 size,
-                  float2 p0, float2 p1, float2 p2, float2 p3,
-                  float2 p4, float2 p5, float2 p6, float2 p7,
-                  float2 p8, float2 p9, float2 p10, float2 p11) {
+                  float3 p0, float3 p1, float3 p2, float3 p3,
+                  float3 p4, float3 p5, float3 p6, float3 p7,
+                  float3 p8, float3 p9, float3 p10, float3 p11) {
     
-    // the pixel's position
-    float2 currentOutputPixelPosition = position;
+    half2 uv = half2(position / size);
+    half2 finalOffset = half2(0.0);
     
-    float radius = min(size.x, size.y) * 0.2;
+    constexpr half zoomFactor = 2.0;
+    half aspectRatio = size.x / size.y;
     
-    float2 points[12] = { p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11 };
+    float3 points[12] = {
+        p0, p1, p2, p3,
+        p4, p5, p6, p7,
+        p8, p9, p10, p11
+    };
     
-    float2 displacements[12] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-    
-    for (int i = 0; i < 12; ++i) {
-        // bulge center pt
-        float2 point = points[i];
+    for (int i = 0; i < 12; i++) {
+        half2 center = half2(points[i].xy);
+        half radius = half(points[i].z);
         
-        // bc all pts are normalised, extra points are all >1, this just filters away all the extras
-        if (point.x > 1) { break; }
+        half2 delta = uv - center;
+        half distance = (delta.x * delta.x) + (delta.y * delta.y) / aspectRatio;
         
-        // unnormalise pt
-        float2 center = point * size;
-        
-        // calculate pixel offset from bulge center
-        float2 offset = position - center;
-        
-        float strength = radius * 0.4;
-        
-        // calculate distance between current pixel and the point
-        float dist = length(offset);
-        
-        if (dist < radius && dist > 0.001) {
-            float2 point = points[i];
-            if (point.x > 1) break;
+        if (distance < radius) {
+            half totalZoom = 1.0h / zoomFactor;
+            half zoomAdjustment = smoothstep(0.0h, radius, distance);
+            totalZoom += zoomAdjustment / 2.0h;
             
-            float2 center = point * size;
-            float2 offset = position - center;
-            float dist = length(offset);
-            
-            if (dist < radius && dist > 0.001) {
-                float t = dist / radius;
-                
-                // tbh just go to desmos and make it until line look cool.
-                float falloff = sin(t * 3.14159265);
-                falloff = pow(falloff, 2.0);
-                
-                if (falloff > 0.001) {
-                    float2 direction = normalize(offset);
-                    float2 displacement = direction * falloff * strength;
-                    
-                    displacements[i] = displacement;
-                }
-            }
+            finalOffset += delta * (totalZoom - 1.0h);
         }
     }
     
-    // get average displacement, after removing empty ones
-    float2 finalDisplacement = 0.0;
-    int count = 0;
+    half2 newPosition = uv + finalOffset;
     
-    for (int j = 0; j < 12; ++j) {
-        if (displacements[j].x != 0) {
-            finalDisplacement += displacements[j];
-            count++;
-        }
-    }
-    
-    // apply the average displacement to the pixel position
-    currentOutputPixelPosition -= finalDisplacement;
-    
-    // display the pixel at the displaced position instead
-    return layer.sample(currentOutputPixelPosition);
+    return layer.sample(float2(newPosition) * size);
 }

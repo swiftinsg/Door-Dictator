@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 struct ContentView: View {
     
     @State private var server = Server()
     @State private var camera = Camera()
 
+    @State private var showCameraControls = true
+    
     var body: some View {
         ZStack {
             if camera.isLoading {
@@ -20,17 +21,12 @@ struct ContentView: View {
                     .scaleEffect(1.5)
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
             } else {
-                CameraView(session: camera.captureSession)
-                    .cornerRadius(12)
-                    .overlay(
-                        FaceOverlayView(faces: camera.detectedFaces)
-                    )
+                CameraBulgeView()
+                    .environment(camera)
             }
 
-//            BulgeDemoView()
-
             VStack {
-                Text("^[\(camera.detectedFaces.count) people](inflect: true) stuck outside")
+                Text("^[\(camera.normalizedFacePositions.count) people](inflect: true) stuck outside")
                     .font(.system(size: 48))
                     .padding(100)
                 
@@ -39,30 +35,31 @@ struct ContentView: View {
                 VoteTallyView(unlock: server.unlockVotes, lock: server.lockVotes, isVotingOverruled: server.isVotingOverruled)
             }
 
-            HStack {
-                Text("Camera Source:")
-                Picker("Camera Source", selection: $camera.selectedCameraIndex) {
-                    ForEach(0..<camera.availableCameras.count, id: \.self) { index in
-                        Text(camera.availableCameras[index].localizedName)
-                            .tag(index)
+            if showCameraControls {
+                HStack {
+                    Text("Camera Source:")
+                    Picker("Camera Source", selection: $camera.selectedCameraIndex) {
+                        ForEach(0..<camera.availableCameras.count, id: \.self) { index in
+                            Text(camera.availableCameras[index].localizedName)
+                                .tag(index)
+                        }
                     }
+                    .disabled(camera.isLoading || camera.availableCameras.isEmpty)
+                    .frame(width: 200)
                 }
-                .disabled(camera.isLoading || camera.availableCameras.isEmpty)
-                .frame(width: 200)
             }
-        }
-        .onAppear {
-            camera.checkPermissionsAndSetupCameras()
         }
         .task {
             server.start()
-            let status = AVCaptureDevice.authorizationStatus(for: .video)
-            
-            print(status == .denied)
-            print(await AVCaptureDevice.requestAccess(for: .video))
+            await camera.checkPermissionsAndSetupCameras()
         }
         .frame(width: 1920, height: 1080)
         .preferredColorScheme(.light)
+        .focusable(true)
+        .onKeyPress(.escape) {
+            showCameraControls.toggle()
+            return .handled
+        }
     }
 }
 
