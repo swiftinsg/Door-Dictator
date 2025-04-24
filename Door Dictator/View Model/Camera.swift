@@ -45,6 +45,8 @@ class Camera: NSObject {
                     DispatchQueue.main.async {
                         self?.setupCameraSources()
                     }
+                } else {
+                    print("FAILED")
                 }
             }
         case .denied, .restricted:

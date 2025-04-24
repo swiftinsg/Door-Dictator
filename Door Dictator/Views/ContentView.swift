@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
     
@@ -55,6 +56,10 @@ struct ContentView: View {
         }
         .task {
             server.start()
+            let status = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            print(status == .denied)
+            print(await AVCaptureDevice.requestAccess(for: .video))
         }
         .frame(width: 1920, height: 1080)
         .preferredColorScheme(.light)
