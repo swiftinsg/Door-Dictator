@@ -16,26 +16,36 @@ struct BulgeDemoView: View {
             BulgeEffectView(points: [
                 point
             ])
-            .gesture(DragGesture(minimumDistance: 0,
-                                 coordinateSpace: .local)
-                .onChanged { value in
-                    let newX = value.location.x / proxy.size.width
-                    let newY = value.location.y / proxy.size.height
+            .onContinuousHover(coordinateSpace: .local, perform: { phase in
+                switch phase {
+                case .active(let cgPoint):
+                    let newX = cgPoint.x / proxy.size.width
+                    let newY = cgPoint.y / proxy.size.height
                     
-                    var playHaptics = false
+                    var feedback: NSHapticFeedbackManager.FeedbackPattern?
                     
                     if Int(point.x * 55) != Int(newX * 55) {
-                        playHaptics = true
+                        feedback = .levelChange
+                        
+                        if Int(newX * 55) % 5 == 0 {
+                            feedback = .alignment
+                        }
                     } else if Int(point.y * 31) != Int(newY * 31) {
-                        playHaptics = true
+                        feedback = .levelChange
+                        
+                        if Int(newY * 31) % 5 == 0 {
+                            feedback = .alignment
+                        }
                     }
                     
                     point = CGPoint(x: newX, y: newY)
                     
-                    if playHaptics {
-                        NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
+                    if let feedback {
+                        NSHapticFeedbackManager.defaultPerformer.perform(feedback, performanceTime: .now)
                     }
-                })
+                case .ended: break
+                }
+            })
         }
     }
 }
