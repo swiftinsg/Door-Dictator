@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Float3 {
+struct Float3: Sendable {
     var x: CGFloat
     var y: CGFloat
     var z: CGFloat

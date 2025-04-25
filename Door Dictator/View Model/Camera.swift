@@ -29,6 +29,9 @@ final class Camera: NSObject, Sendable {
     }
 
     @ObservationIgnored
+    var visionTask: Task<Void, Never>?
+    
+    @ObservationIgnored
     let captureSession = AVCaptureSession()
     
     @ObservationIgnored
@@ -42,7 +45,6 @@ final class Camera: NSObject, Sendable {
 
     override init() {
         super.init()
-        captureSession.sessionPreset = .high
     }
 
     func checkPermissionsAndSetupCameras() async {

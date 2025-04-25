@@ -11,12 +11,14 @@ import CoreImage
 
 extension Camera {
     func detectFaces(in sampleBuffer: ImageBufferContainer) {
-        Task(priority: .userInitiated) {
+        guard visionTask == nil || visionTask?.isCancelled == true else { return }
+        
+        visionTask = Task(priority: .userInitiated) {
             let request = DetectFaceRectanglesRequest()
             
             let ciImage = CIImage(cvPixelBuffer: sampleBuffer.buffer)
             
-            let points: [Float3] = try! await request.perform(on: ciImage)
+            let points: [Float3]? = try? await request.perform(on: ciImage)
                 .map { observation in
                     Float3(
                         x: observation.boundingBox.cgRect.midX,
@@ -26,7 +28,10 @@ extension Camera {
                 }
             
             await MainActor.run {
-                self.normalizedFacePositions = points
+                if let points {
+                    normalizedFacePositions = points
+                }
+                visionTask = nil
             }
         }
     }
