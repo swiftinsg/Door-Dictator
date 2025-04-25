@@ -11,11 +11,9 @@ struct CameraBulgeView: View {
     
     @Environment(Camera.self) var camera: Camera
     
-    let maxPoints = 12
-    
+    @MainActor
     var body: some View {
-        let points = camera.normalizedFacePositions + Array(repeating: Float3(x: 2, y: 2, radius: 0), count: maxPoints - camera.normalizedFacePositions.count)
-        
+        let points = camera.normalizedFacePositions
         if let image = camera.image {
             image
                 .resizable()

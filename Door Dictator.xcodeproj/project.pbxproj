@@ -12,12 +12,36 @@
 
 /* Begin PBXFileReference section */
 		3208A72C2DB91ACD00931219 /* Door Dictator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Door Dictator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3275640C2DBBADC700039985 /* Door Dictator Voter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Door Dictator Voter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3275641C2DBBAE0C00039985 /* Exceptions for "Shared" folder in "Door Dictator Voter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				VoteEntry.swift,
+			);
+			target = 3275640B2DBBADC700039985 /* Door Dictator Voter */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3208A72E2DB91ACD00931219 /* Door Dictator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Door Dictator";
+			sourceTree = "<group>";
+		};
+		3275640D2DBBADC800039985 /* Door Dictator Voter */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Door Dictator Voter";
+			sourceTree = "<group>";
+		};
+		327564192DBBAE0500039985 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3275641C2DBBAE0C00039985 /* Exceptions for "Shared" folder in "Door Dictator Voter" target */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -31,13 +55,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		327564092DBBADC700039985 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3208A7232DB91ACD00931219 = {
 			isa = PBXGroup;
 			children = (
+				327564192DBBAE0500039985 /* Shared */,
 				3208A72E2DB91ACD00931219 /* Door Dictator */,
+				3275640D2DBBADC800039985 /* Door Dictator Voter */,
 				3208A72D2DB91ACD00931219 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				3208A72C2DB91ACD00931219 /* Door Dictator.app */,
+				3275640C2DBBADC700039985 /* Door Dictator Voter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,6 +101,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				3208A72E2DB91ACD00931219 /* Door Dictator */,
+				327564192DBBAE0500039985 /* Shared */,
 			);
 			name = "Door Dictator";
 			packageProductDependencies = (
@@ -74,6 +109,28 @@
 			);
 			productName = "Door Dictator";
 			productReference = 3208A72C2DB91ACD00931219 /* Door Dictator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3275640B2DBBADC700039985 /* Door Dictator Voter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 327564142DBBADC900039985 /* Build configuration list for PBXNativeTarget "Door Dictator Voter" */;
+			buildPhases = (
+				327564082DBBADC700039985 /* Sources */,
+				327564092DBBADC700039985 /* Frameworks */,
+				3275640A2DBBADC700039985 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3275640D2DBBADC800039985 /* Door Dictator Voter */,
+			);
+			name = "Door Dictator Voter";
+			packageProductDependencies = (
+			);
+			productName = "Door Dictator Voter";
+			productReference = 3275640C2DBBADC700039985 /* Door Dictator Voter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -87,6 +144,9 @@
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					3208A72B2DB91ACD00931219 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					3275640B2DBBADC700039985 = {
 						CreatedOnToolsVersion = 16.3;
 					};
 				};
@@ -109,6 +169,7 @@
 			projectRoot = "";
 			targets = (
 				3208A72B2DB91ACD00931219 /* Door Dictator */,
+				3275640B2DBBADC700039985 /* Door Dictator Voter */,
 			);
 		};
 /* End PBXProject section */
@@ -121,10 +182,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3275640A2DBBADC700039985 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3208A7282DB91ACD00931219 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		327564082DBBADC700039985 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -310,6 +385,69 @@
 			};
 			name = Release;
 		};
+		327564152DBBADC900039985 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XL5JK4F896;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Door-Dictator-Voter-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sg.swiftin.Door-Dictator-Voter";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		327564162DBBADC900039985 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XL5JK4F896;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Door-Dictator-Voter-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sg.swiftin.Door-Dictator-Voter";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -327,6 +465,15 @@
 			buildConfigurations = (
 				3208A7392DB91ACE00931219 /* Debug */,
 				3208A73A2DB91ACE00931219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		327564142DBBADC900039985 /* Build configuration list for PBXNativeTarget "Door Dictator Voter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				327564152DBBADC900039985 /* Debug */,
+				327564162DBBADC900039985 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

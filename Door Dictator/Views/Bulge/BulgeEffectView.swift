@@ -27,18 +27,18 @@ struct BulgeEffectView: View {
                 content
                     .layerEffect(ShaderLibrary.bulgeEffect(
                         .float2(proxy.size),
-                        .float2(points[0]),
-                        .float2(points[1]),
-                        .float2(points[2]),
-                        .float2(points[3]),
-                        .float2(points[4]),
-                        .float2(points[5]),
-                        .float2(points[6]),
-                        .float2(points[7]),
-                        .float2(points[8]),
-                        .float2(points[9]),
-                        .float2(points[10]),
-                        .float2(points[11])
+                        .float3(Float3(point: points[0], radius: 0.1)),
+                        .float3(Float3(point: points[1], radius: 0.1)),
+                        .float3(Float3(point: points[2], radius: 0.1)),
+                        .float3(Float3(point: points[3], radius: 0.1)),
+                        .float3(Float3(point: points[4], radius: 0.1)),
+                        .float3(Float3(point: points[5], radius: 0.1)),
+                        .float3(Float3(point: points[6], radius: 0.1)),
+                        .float3(Float3(point: points[7], radius: 0.1)),
+                        .float3(Float3(point: points[8], radius: 0.1)),
+                        .float3(Float3(point: points[9], radius: 0.1)),
+                        .float3(Float3(point: points[10], radius: 0.1)),
+                        .float3(Float3(point: points[11], radius: 0.1))
                     ), maxSampleOffset: CGSize(width: 20, height: 20))
             })
     }

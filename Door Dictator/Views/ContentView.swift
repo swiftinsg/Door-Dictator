@@ -23,10 +23,11 @@ struct ContentView: View {
             } else {
                 CameraBulgeView()
                     .environment(camera)
+//                BulgeDemoView()
             }
 
             VStack {
-                Text("^[\(camera.normalizedFacePositions.count) people](inflect: true) stuck outside")
+                Text("^[\(camera.peopleStuckOutside) people](inflect: true) stuck outside")
                     .font(.system(size: 48))
                     .padding(100)
                 

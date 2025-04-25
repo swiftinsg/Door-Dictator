@@ -20,9 +20,9 @@ extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
             let tempImage = CIImage(cvImageBuffer: container.buffer).image
             
             await MainActor.run {
-                detectFaces(in: container)
                 self.image = tempImage
             }
+            await detectFaces(in: container)
         }
     }
 }

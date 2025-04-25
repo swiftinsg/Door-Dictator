@@ -23,4 +23,10 @@ struct Float3: Sendable {
         self.y = y
         self.z = z
     }
+    
+    init(point: CGPoint, radius: CGFloat) {
+        self.x = point.x
+        self.y = point.y
+        self.z = radius
+    }
 }

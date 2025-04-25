@@ -18,7 +18,8 @@ final class Camera: NSObject, Sendable {
     
     var image: Image?
     
-    var normalizedFacePositions: [Float3] = []
+    var normalizedFacePositions: [Float3] = Array(repeating: Float3(x: 2, y: 2, z: 2), count: 12)
+    var peopleStuckOutside: Int = 0
     
     var selectedCameraIndex: Int = 0 {
         didSet {
